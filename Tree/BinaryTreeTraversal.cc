@@ -9,16 +9,16 @@
 using namespace std;
 
 /*树的数据结构*/
-struct TreeNode{
+struct BinaryTreeNode{
 	int val;
-	TreeNode* left;
-	TreeNode* right;
-	TreeNode(int v = 0): val(v), left(NULL), right(NULL){}
+	BinaryTreeNode* left;
+	BinaryTreeNode* right;
+	BinaryTreeNode(int v = 0): val(v), left(NULL), right(NULL){}
 	void Print(){printf("%d ", val);}
 };
 
 /*前序遍历-递归*/
-void preorderRecursive(TreeNode* root)
+void preorderRecursive(BinaryTreeNode* root)
 {
 	if(!root)
 		return;
@@ -31,13 +31,13 @@ void preorderRecursive(TreeNode* root)
  * 前序遍历-非递归
  * 用栈辅助实现
  * */
-void preorderNonRecursive(TreeNode* root)
+void preorderNonRecursive(BinaryTreeNode* root)
 {
-	stack<TreeNode*> s;	
+	stack<BinaryTreeNode*> s;	
 	s.push(root);
 	while(s.size())
 	{
-		TreeNode* cur = s.top();
+		BinaryTreeNode* cur = s.top();
 		cur->Print();
 		s.pop();
 		if(cur->right) s.push(cur->right);
@@ -47,7 +47,7 @@ void preorderNonRecursive(TreeNode* root)
 
 
 /*中序遍历-递归*/
-void inorderRecursive(TreeNode* root)
+void inorderRecursive(BinaryTreeNode* root)
 {
 	if(!root)
 		return;
@@ -57,11 +57,14 @@ void inorderRecursive(TreeNode* root)
 }
 
 
-/*中序遍历-非递归*/
-void inorderNonRecursive(TreeNode* root)
+/*
+ * 中序遍历-非递归
+ * 先走到最左，再回来走右边
+ * */
+void inorderNonRecursive(BinaryTreeNode* root)
 {
-	stack<TreeNode*> s;
-	TreeNode* pNode = root;
+	stack<BinaryTreeNode*> s;
+	BinaryTreeNode* pNode = root;
 	while(pNode || s.size())
 	{
 		while(pNode)  // 一直往左到底
@@ -78,7 +81,7 @@ void inorderNonRecursive(TreeNode* root)
 
 
 /*后序遍历 - 递归*/
-void postorderRecursive(TreeNode* root)
+void postorderRecursive(BinaryTreeNode* root)
 {
 	if(!root) return;
 	postorderRecursive(root->left);
@@ -86,14 +89,18 @@ void postorderRecursive(TreeNode* root)
 	root->Print();
 }
 
-/*后序遍历 - 非递归*/
-void postorderNonRecursive(TreeNode* root)
+/*
+ * 后序遍历 - 非递归
+ * 1. 用两个栈来实现，其中s2保存后序的逆序
+ * 2. 用vector保存其逆序
+ * */
+void postorderNonRecursive(BinaryTreeNode* root)
 {
-	stack<TreeNode*> s1;
-	stack<TreeNode*> s2;
+	stack<BinaryTreeNode*> s1;
+	stack<BinaryTreeNode*> s2;
 	s1.push(root);
 	while(s1.size()){
-		TreeNode* pNode = s1.top();
+		BinaryTreeNode* pNode = s1.top();
 		s2.push(pNode);
 		s1.pop();
 		if(pNode->left) s1.push(pNode->left);
@@ -103,6 +110,24 @@ void postorderNonRecursive(TreeNode* root)
 		s2.top()->Print();
 		s2.pop();
 	}
+}
+
+void postorderNonRecursive1(BinayrTreeNode* root)
+{
+	vector<int> v;
+	stack<TreeNode*> s;
+	s.push(root);
+	while(s.size()){
+		BinaryTreeNode* tmp = s.top();
+		v.emplace_back(tmp->val);
+		s.pop();
+		if(tmp->left) s.push(tmp->left);
+		if(tmp->right) s.push(tmp->right);
+	}
+
+	reverse(v.begin(), v.end());
+	for(const auto& val : v)
+		printf("%d ", val);
 }
 
 /*
@@ -121,9 +146,9 @@ void postorderNonRecursive(TreeNode* root)
  * */
 
 int main(){
-	TreeNode nodes[9];
+	BinaryTreeNode nodes[9];
 	for(int i = 0; i < 9; i++)
-		nodes[i] = TreeNode(i);
+		nodes[i] = BinaryTreeNode(i);
 	nodes[0].left = &nodes[1];
 	nodes[0].right = &nodes[2];
 	nodes[1].left = &nodes[3];
