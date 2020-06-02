@@ -59,7 +59,7 @@ public:
 	int minDistance(string s1, string s2){
 		int m = s1.size();
 		int n = s2.size();
-		vector<int, int> dp(m, vector<int>(n, 0));
+		vector<vector<int>> dp(m, vector<int>(n, 0));
 		for(int i = 1; i <= m; i++)
 			dp[i][0] = i;
 		for(int i = 1; i <= m; i++)

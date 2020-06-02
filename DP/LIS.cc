@@ -11,7 +11,7 @@
 /* 思路一:
  *
  * 1. 子问题状态: dp[i], 表示以nums[i]结尾的最长上升子序列
- * 2. 状态转移方程: dp[i] = max(dp[j]), j < i 且 nums[i] > nums[j]
+ * 2. 状态转移方程: dp[i] = max(dp[j]+1, dp[i]), j < i 且 nums[i] > nums[j]
  *
  * base dp[i] = 1, 每一个位置的最小值都至少为1
  *
@@ -69,5 +69,43 @@ public:
 			top[left] = poker
 		}
 		return piles;
+	}
+};
+
+
+/*
+ * 变种：求最长递增子序列的个数
+ *
+ * */
+
+/* 思路：
+ *
+ * 子状态：dp[i] = {a,b}  表示nums[i] 最长递增子序列长度为a，以及长度为a的个数为b
+ *
+ * */
+
+class Solution{
+public:
+	int findNumOfLIS(vector<int> &nums){
+		if(nums.empty()) return 0;
+		int N = nums.size();
+		vector<pair<int,int>> dp(N, {1, 1});
+		int maxNum = 0;
+		for(int i = 1; i < N; i++){
+			for(int j = 0; j < i; j++){
+				if(nums[i] > nums[j]){
+					if(dp[i].first < dp[j].first + 1)
+						dp[i] = {dp[j].first, dp[j].second};
+					else if(dp[i].first == dp[j].first + 1)
+						dp[i].second += dp[j].second;
+				}
+			}
+			maxNum = max(maxNum, dp[i].first);
+		}
+		int res = 0;
+		for(int i = 0; i < N; i++)
+			if(dp[i].first == maxNum)
+				res += dp[i].second;
+		return res;
 	}
 };
