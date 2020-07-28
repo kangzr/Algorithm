@@ -13,7 +13,9 @@
  *
  * */
 
+
 class Solution{
+	// 求树的深度
 	int TreeDepth(TreeNode* root){
 		if(!root) return 0;
 		int left = TreeDepth(root->left);
@@ -21,13 +23,17 @@ class Solution{
 		return (left > right) ? left + 1 : right + 1;
 	}
 
+	// 判断是否为平衡二叉树
 	int isBalance(TreeNode* root){
 		if(!root) return true;
+		// 左子树深度
 		int left = TreeDepth(root->left);
+		// 右子树深度
 		int right = TreeDepth(root->right);
 		int diff = left - right;
 		if(diff > 1 || diff < -1)
 			return false;
+		// 左右子树是否为平衡二叉树
 		return isBalance(root->left) & isBalance(root->right);
 	}
 };
@@ -50,7 +56,7 @@ class Solution2{
 		if(!root) return 0;
 		int left = dfs(root->left);
 		if(left == -1) return -1;
-		int right = dfs(root->rightk);
+		int right = dfs(root->right);
 		if(right == -1) return -1;
 		return abs(left - right) < 2 ? max(left, right) + 1 : -1;
 	}

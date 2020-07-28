@@ -76,7 +76,7 @@ public:
 		Node* pNode = head;
 		while(pNode){
 			Node* pClone = pNode->next;
-			if(pNode->random) pClone->random = pNode->next->random;
+			if(pNode->random) pClone->random = pNode->random->next;
 			pNode = pClone->next;
 		}
 	}
@@ -100,4 +100,3 @@ public:
 		return pCloneHead;
 	}
 };
-

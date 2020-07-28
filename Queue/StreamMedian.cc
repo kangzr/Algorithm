@@ -25,6 +25,7 @@ public:
 	MedianFinder(){}
 	void addNum(int num){
 		// 奇数放入左边
+		// 保证右边小顶堆的最小值 大于左边小顶堆的最大值
 		if((maxHeap.size() + minHeap.size()) & 1){
 			if(minHeap.size() && num > minHeap.top()){
 				// 如果num比右边最小值大，则先入右边，再取出其top值放入左边

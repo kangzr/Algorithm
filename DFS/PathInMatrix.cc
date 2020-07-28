@@ -11,7 +11,8 @@
  *	["a","d","e","e"]
  * ]
  *
- * 但矩阵中不包含字符串“abfb”的路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入这个格子。
+ * 但矩阵中不包含字符串“abfb”的路径，
+ * 因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入这个格子。
  *
  * 思路(DFS):
  * 1. 遍历矩阵中每一个元素，若该字符等于给定字符串第一个元素，则对该元素执行dfs
@@ -19,7 +20,7 @@
  * 3. 从当前元素的四个方向进行递归
  * 4. 还原temp, 回溯
  *
- * */
+ */
 
 
 class Solution{
@@ -39,7 +40,7 @@ public:
 		{
 			int x = i + dx[k];
 			int y = i + dy[k];
-			if(i >= 0 && i < row && j >= 0 && j < col && board[x][y] == word[idx])
+			if(x >= 0 && x < row && y >= 0 && y < col && board[x][y] == word[idx])
 				if(dfs(board, x, y, idx + 1, word))
 					return true;
 				
@@ -53,8 +54,10 @@ public:
 			return false;
 		for(int i = 0; i < board.size(); i++){
 			for(int j = 0; j < board[i].size(); j++){
-				if(dfs(board, i, j, 0, word))
-					return true;
+				if (board[i][j] == word[0]){
+					if(dfs(board, i, j, 0, word))
+						return true;
+				}
 			}
 		}
 	}

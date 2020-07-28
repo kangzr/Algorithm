@@ -10,7 +10,10 @@
  * n为奇数 x^n = x^(n/2) * x^(n/2) * x
  * */
 
+#include<iostream>
+
 class Solution{
+public:
 	double myPow(double base, int exponent){
 		double res = 1.0;
 		int i = exponent;
@@ -19,6 +22,13 @@ class Solution{
 			base *= base;
 			i /= 2;
 		}
-		return n < 0 ? 1.0 / res : res;
+		return exponent < 0 ? 1.0 / res : res;
 	}
 };
+
+
+int main(){
+	Solution s;
+	std::cout << s.myPow(2.0, -4);
+	return 0;
+}

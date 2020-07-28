@@ -20,23 +20,24 @@
  *
  * */
 
+
 class Solution1{
 public:
-	vector<Node*> vec;
-	void helper(Node* root){
+	vector<TreeNode*> vec;
+	void helper(TreeNode* root){
 		if(!root) return;
 		helper(root->left);
 		vec.emplace_back(root);
 		helper(root->right);
 	}
 
-	Node* convertTreeToList(Node* root){
+	TreeNode* convertTreeToList(TreeNode* root){
 		if(!root) return NULL;
 		helper(root);
 		int len = vec.size() - 1;
 		for(int i = 0; i < len; i++){
-			vec[i]->left = vec[i+1];
-			vec[i+1]->right = vec[i];
+			vec[i]->right = vec[i+1];
+			vec[i+1]->left = vec[i];
 		}
 		vec[0]->left = vec[len];
 		vec[len]->right = vec[0];
@@ -49,7 +50,7 @@ public:
  *
  * 不需要使用vector，dfs进行中序遍历，然后使用pre(前一节点), cur(当前节点)
  *
- * 调整指针是的pre->left = cur, cur->right = pre 即可
+ * 调整指针是的pre->right = cur, cur->left = pre 即可
  *
  * 最后再处理head 和pre的连接
  *
@@ -58,8 +59,8 @@ public:
 
 class Solution1{
 public:
-	Node *pre, *head;
-	Node* convertTreeToList(Node* root){
+	TreeNode *pre, *head;
+	TreeNode* convertTreeToList(TreeNode* root){
 		if(!root) return NULL;
 		dfs(root);
 		head->left = pre;
@@ -67,17 +68,18 @@ public:
 		return head;
 	}
 
-	void dfs(Node* cur){
+	void dfs(TreeNode* cur){
 		if(!cur) return;
 		dfs(cur->left);
 		// 保存头节点，为最左最小值
 		if(pre == NULL)
 			head = cur;
 		else{
-			pre->left = cur;
-			cur->right = pre;
+			pre->right = cur;
+			cur->left = pre;
 		}
 		pre = cur;
 		dfs(cur->right);
 	}
 };
+

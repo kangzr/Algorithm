@@ -25,8 +25,10 @@ public:
 			pNode = pNode->next;
 		if(!pNode->next)
 			return NULL;
-		pNode = pNode->next;
-		return head->next;
+		ListNode* pDeleted = pNode->next;
+		delete pDeleted;
+		pNode->next = pNode->next->next;
+		return head;
 	}
 
 };

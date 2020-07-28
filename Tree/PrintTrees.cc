@@ -12,24 +12,25 @@
  * 其本质就是广度优先遍历二叉树
  * */
 
+
+
 class Solution{
 public:
 	vector<int> PrintFromTopToBottom(TreeNode* root){
-		if(!root) return {};
-		deque<TreeNode*> dq;
-		vector<int> ret;
-		dq.push_back(root);
-		while(dq.size()){
-			TreeNode* tmp = dq.front();
-			dq.pop();
-			ret.emplace_back(tmp->val);
-			if(tmp->left) dq.push_front(tmp->left);
-			if(tmp->right) dq.push_front(tmp->right);
+		if (!root) return {};
+		queue<TreeNode*> q;
+		vector<int> res;
+		q.push(root);
+		while(q.size()){
+			TreeNode* tmp = q.front();
+			q.pop()
+			res.emplace_back(tmp->val);
+			if(tmp->left) q.push(tmp->left);
+			if(tmp->right) q.push(tmp->right);
 		}
-		return ret;
+		return res;
 	}
 };
-
 
 /*
  * Z字型打印二叉树
