@@ -4,11 +4,15 @@
  * 数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
  *
  * */
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
 
 // 思路一：排序后，取中间数  时间复杂度O(nlogn)
 class Solution1{
 public:
-	int majorityElem(vector<int>& nums){
+	int majorityElem(vector<int> &nums){
 		if(nums.empty()) return {};
 		sort(nums.begin(), nums.end());
 		return nums[nums.size() / 2];
@@ -21,12 +25,12 @@ public:
 class Solution2{
 public:
 	int majorityElem(vector<int>& nums){
-		if(nums.empty()) return {};
+		if(nums.empty()) return -1;
 		int len = nums.size();
 		int mid = len >> 1;
-		int low = 0, high = len - 1;
-		int idx = partition(nums, low, high);
+		int low = 0, high = len - 1, idx = 0;
 		while(idx != mid){
+			idx = partition(nums, low, high);
 			if(idx > mid)
 				high = idx - 1;
 			else
@@ -55,7 +59,7 @@ public:
 class Solution3{
 public:
 	int majorityElem(vector<int>& nums){
-		if(nums.empty()) return {};
+		if(nums.empty()) return -1;
 		int majority, vote = 0;
 		for(int i = 0; i < nums.size(); i++){
 			if(vote == 0) majority = nums[i];
@@ -65,3 +69,10 @@ public:
 		return majority;
 	}
 };
+
+int main(){
+	Solution3 s1;
+	vector<int> vec={4,4,2,2,2,3,2,1};
+	cout << "res: " << s1.majorityElem(vec) << endl;
+	return 0;
+}

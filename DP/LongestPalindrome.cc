@@ -12,9 +12,12 @@
  * dp[j][i]: 表示从j到i之间的子串是否为回文
  *
  * 状态转移：
- * dp[j][i] = dp[j+1][i-1] && (s[j] == s[i] || i - j < 3)
+ * dp[j][i] = (i - j < 3 || dp[j+1][i-1]) && (s[j] == s[i])
  *
  * */
+#include<iostream>
+#include<vector>
+using namespace std;
 
 class Solution{
 public:
@@ -39,3 +42,10 @@ public:
 		return s.substr(left, maxLen);
 	}
 };
+
+
+int main(){
+	Solution s;
+	cout << s.longestPalindrome("baabaad") << endl;
+	return 0;
+}

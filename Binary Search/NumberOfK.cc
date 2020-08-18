@@ -51,6 +51,7 @@ public:
 		// int upper = upper_bound(nums.begin(), nums.end(), k) - nums.begin();
 		int low = my_lower_bound(nums, k);
 		int upper = my_upper_bound(nums, k);
+		cout << "low:" << low << "upper " << upper << endl;
 		return upper - low;
 	}
 };

@@ -19,7 +19,6 @@
  * 边界条件：第一行只能从左至右，第二行只能从上至下
  *
  * */
-
 class Solution1{
 public:
 	int maxGiftValue(vector<vector<int>> &grid){
@@ -53,7 +52,7 @@ public:
 		if(grid.empty() || grid[0].empty()) return 0;
 		vector<int> dp(grid[0].begin(), grid[0].end());
 		for(int j = 1; j < grid[0].size(); j++)
-			dp[j] +=dp[j-1];
+			dp[j] += dp[j-1];
 		for(int i = 1; i < grid.size(); i++){
 			dp[0] += grid[i][0]
 			for(int j = 1; j < grid[0].size(); j++)
@@ -62,4 +61,3 @@ public:
 		return dp.back()
 	}
 };
-

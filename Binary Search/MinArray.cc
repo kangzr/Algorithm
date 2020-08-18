@@ -20,7 +20,7 @@ public:
 		if (numbers.size() == 0) return -1;
 		int left = 0, right = numbers.size() - 1, mid = 0;
 		while(left < right){
-			mid = (left + right) / 2;
+			mid = left + (right - left) / 2;
 			if(numbers[mid] == numbers[right])
 				right--;
 			else if(numbers[mid] < numbers[right])

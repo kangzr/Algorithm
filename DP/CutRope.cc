@@ -12,6 +12,8 @@
  * dp[i] ： 表示长度为i的绳子，剪成若干断后，各段长度乘积的最大值
  * 时间复杂度O(n^2)，空间复杂度O(n)
  * */
+// dp[i]；长度为i的绳子, 剪成若干段后，各段长度乘积的最大值
+//
 class Solution1{
 public:
 	int cutRope(int n){
@@ -58,4 +60,3 @@ public:
 		if(b == 2) return pow(3, a) * 2;
 		*/
 };
-

@@ -1,7 +1,7 @@
 /*
  * 凑零钱问题
  *
- * 有k中面值的硬币,面值分别为c1,c2,...,ck,最少需要几枚硬币能凑出总数amount
+ * 有k种面值的硬币,面值分别为c1,c2,...,ck,最少需要几枚硬币能凑出总数amount
  * 其中，硬币数量无限，若凑不出则返回-1
  *
  * */
@@ -40,6 +40,7 @@ int helper(vector<int> &coins, int amount){
  * 时间复杂度 O(kn)
  * */
 
+
 int coinChange(vector<int> &coins, int amount){
 	unordered_map<int, int> memo;
 	return helper(coins, amount, memo);
@@ -76,5 +77,5 @@ int coinChange(vector<int> &coins, int amount){
 			dp[i] = min(dp[i], 1 + dp[i - coin]);
 		}
 	}
-	return (dp[amount] == amount + 1) ? -1 : dp[amount];
+	return dp[amount] ? (dp[amount] != amount + 1) : -1;
 }

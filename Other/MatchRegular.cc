@@ -25,6 +25,3 @@ public:
 			return firstMatch && isMatch(++s, ++p);
 	}
 };
-
-
-/*思路二 动态规划*/

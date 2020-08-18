@@ -16,6 +16,7 @@
  * */
 
 int fib(int n){
+	if(n < 1) return 0;
 	if(n < 3) return 1;
 	return f(n-1) + f(n-2);
 }
@@ -29,11 +30,10 @@ int fib(int n){
  * 时间复杂度: O(n) 空间复杂度: O(n)
  *
  * */
-
 int fib(int n){
 	if (n < 1) return 0;
 	vector<int> memo(n + 1, 0);
-	return helper(n, ret);
+	return helper(n, memo);
 }
 
 int helper(int n, vector<int> &memo){
