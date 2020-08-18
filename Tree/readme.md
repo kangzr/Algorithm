@@ -8,11 +8,14 @@
 - 二叉搜索树：中序遍历为升序, 查找时间复杂度为O(logn) , n 为树的高度
 
 ```数据结构
+// Definition for a binary tree node
 struct TreeNode{
 	int val;
 	TreeNode* left;
 	TreeNode* right;
-	TreeNode(int v = 0): val(v), left(NULL), right(NULL){}
+	TreeNode() : val(0), left(nullptr), right(nullptr){}
+	TreeNode(int x) : val(x), left(nullptr), right(nullptr){}
+	TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right){}
 };
 ```
 
